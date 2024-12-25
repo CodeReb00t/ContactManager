@@ -1,0 +1,36 @@
+# Node modules
+node_modules
+
+# Logs
+*.log
+logs/
+
+# Environment variables file
+.env
+
+# MongoDB data (in case you are using a local database)
+/data/
+
+# NPM Debug files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE-specific files (e.g., VSCode)
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+
+# Package-lock.json or yarn.lock (optional, if you don’t want to commit dependency lock files)
+package-lock.json
+yarn.lock
