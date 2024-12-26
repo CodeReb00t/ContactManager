@@ -1,6 +1,5 @@
 // src/components/ContactItem.jsx
 
-import React from "react";
 
 const ContactItem = ({ contact }) => {
     return (
@@ -8,6 +7,7 @@ const ContactItem = ({ contact }) => {
             <div>
                 <p className="font-medium text-gray-800">{contact.name}</p>
                 <p className="text-gray-600 text-sm">{contact.email}</p>
+                <p className="text-gray-600 text-sm">{contact.phone}</p>
             </div>
         </li>
     );

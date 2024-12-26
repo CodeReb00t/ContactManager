@@ -1,26 +1,29 @@
-// src/components/ContactForm.jsx
-
-import React, { useState } from "react";
+import { useState } from "react";
 import { addContact } from "../services/contactService";
 
 const ContactForm = ({ fetchContacts }) => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
+    const [error, setError] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await addContact({ name, email });
+            await addContact({ name, email, phone });
             setName("");
             setEmail("");
-            fetchContacts(); // Refresh the list
+            setPhone("");
+            setError("");
+            if (fetchContacts) fetchContacts(); // Refresh contacts
         } catch (error) {
-            console.error("Error submitting contact:", error);
+            setError("Failed to add contact. Please try again.");
         }
     };
 
     return (
         <form onSubmit={handleSubmit} className="p-4 bg-white rounded shadow">
+            {error && <p className="text-red-500">{error}</p>}
             <div className="mb-4">
                 <label className="block text-gray-700">Name</label>
                 <input
@@ -37,6 +40,16 @@ const ContactForm = ({ fetchContacts }) => {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    className="w-full px-3 py-2 border rounded"
+                    required
+                />
+            </div>
+            <div className="mb-4">
+                <label className="block text-gray-700">Phone</label>
+                <input
+                    type="text"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
                     className="w-full px-3 py-2 border rounded"
                     required
                 />

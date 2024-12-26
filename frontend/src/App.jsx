@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { fetchContacts } from "./services/contactService";
 import ContactForm from "./components/ContactForm";
 import ContactList from "./components/ContactList";
