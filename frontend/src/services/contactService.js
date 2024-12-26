@@ -1,17 +1,10 @@
 // src/services/contactService.js
 
 const API_URL = "http://localhost:5000/contacts";
-export const API_ROUTES = {
-    GET_CONTACTS: "/contacts",
-    ADD_CONTACT: "/add-contact",
-    UPDATE_CONTACT: "/edit-contact/:id",
-    DELETE_CONTACT: "/delete-contact/:id",
-};
-
 
 export const fetchContacts = async () => {
     try {
-        const response = await fetch(API_ROUTES.GET_CONTACTS);
+        const response = await fetch(API_URL);
         if (!response.ok) {
             throw new Error("Failed to fetch contacts");
         }
