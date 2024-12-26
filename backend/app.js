@@ -33,6 +33,20 @@ app.post("/add-contact", async (req, res) => {
         res.status(400).json({ error: "Failed to add contact" });
     }
 });
+app.put('/edit-contact/:id', (req, res) => {
+    const { id } = req.params;
+    const { name, email, phone } = req.body;
+    Contact.findByIdAndUpdate(id, { name, email, phone }, { new: true })
+        .then(updatedContact => res.json(updatedContact))
+        .catch(err => res.status(400).json('Error ' + err));
+});
+app.delete('/delete-contact/:id', (req, res) => {
+    const { id } = req.params;
+    Contact.findByIdAndDelete(id)
+        .then(() => res.json('Contact deleted'))
+        .catch(err => res.status(400).json('Error ' + err));
+});
+
 
 app.listen(port,()=>{
     console.log(`Server running at http://localhost:${port}/contacts`);

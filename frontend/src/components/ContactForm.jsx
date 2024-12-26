@@ -1,23 +1,36 @@
-import { useState } from "react";
-import { addContact } from "../services/contactService";
+import { useState, useEffect } from "react";
+import { addContact, updateContact } from "../services/contactService";
 
-const ContactForm = ({ fetchContacts }) => {
+const ContactForm = ({ fetchContacts, editContact, setEditContact }) => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
     const [error, setError] = useState("");
 
+    useEffect(() => {
+        if (editContact) {
+            setName(editContact.name);
+            setEmail(editContact.email);
+            setPhone(editContact.phone);
+        }
+    }, [editContact]);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await addContact({ name, email, phone });
+            if (editContact) {
+                await updateContact(editContact._id, { name, email, phone });
+                setEditContact(null);
+            } else {
+                await addContact({ name, email, phone });
+            }
             setName("");
             setEmail("");
             setPhone("");
             setError("");
-            if (fetchContacts) fetchContacts(); // Refresh contacts
+            fetchContacts(); // Refresh contacts
         } catch (error) {
-            setError("Failed to add contact. Please try again.");
+            setError("Failed to save contact. Please try again.");
         }
     };
 
@@ -58,7 +71,7 @@ const ContactForm = ({ fetchContacts }) => {
                 type="submit"
                 className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
             >
-                Add Contact
+                {editContact ? "Update Contact" : "Add Contact"}
             </button>
         </form>
     );
