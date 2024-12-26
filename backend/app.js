@@ -24,7 +24,7 @@ app.get("/contacts", async (req, res) => {
 
 app.post("/add-contact", async (req, res) => {
     try {
-        console.log('Request Body:', req.body);
+        // console.log('Request Body:', req.body);
         const { name, email, phone } = req.body;
         const newContact = new Contact({ name, email, phone });
         await newContact.save();
