@@ -1,12 +1,12 @@
 import { FaEdit, FaTrash } from "react-icons/fa";
 
-const ContactList = ({ contacts, fetchContacts, setEditContact }) => {
+const ContactList = ({ contacts, setEditContact, fetchContacts }) => {
     const handleDelete = async (id) => {
         try {
             await fetch(`http://localhost:5000/delete-contact/${id}`, {
                 method: "DELETE",
             });
-            fetchContacts(); // Refresh contacts
+            fetchContacts(); // Refresh the contact list
         } catch (error) {
             console.error("Error deleting contact:", error);
         }
