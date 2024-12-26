@@ -22,6 +22,7 @@ Open another terminal window and navigate to the backend directory:
 
 ```bash
 cd backend
+npm install
 node app.js
 ```
 
